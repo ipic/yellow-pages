@@ -1,12 +1,95 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title></title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
     </head>
     <body>
+    {% block content %}
+    <div class="ui vertical masthead center aligned segment">
+        <div class="ui text container">
+            <h1 class="ui header">IPIC Yellow Pages</h1>
+            <h2>Busque serviços e profissionais dentro da nossa comunidade.</h2>
+        </div>
+        <div class="ui grid container four column center aligned stackable">
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="paw circular icon"></i> Animais de Estimação
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="money circular icon"></i> Bancos e instituições financeiras
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="soccer circular icon"></i> Centro Culturais e de Lazer
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="food circular icon"></i> Comer e beber
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="comments outline circular icon"></i> Comunicação e mídia
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="building circular icon"></i> Construção e reformas
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="book circular icon"></i> Educação e cursos
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="camera retro circular icon"></i> Festas e eventos
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="mouse pointer retro circular icon"></i> Informática
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="recycle retro circular icon"></i> Limpeza e Conservação e Higienização
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="doctor retro circular icon"></i> Saúde
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="shipping retro circular icon"></i> Veículos
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="ui icon header">
+                    <i class="sun retro circular icon"></i> Viagens e Turismo
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
     </body>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 </html>
