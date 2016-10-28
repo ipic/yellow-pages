@@ -27,6 +27,7 @@ class UserAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
+    list_display = ('title', 'slug')
     prepopulated_fields = {'slug': ('title',), }
 
 
