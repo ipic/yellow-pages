@@ -1,9 +1,8 @@
 from django.contrib import admin
-from django import forms
 from django.contrib.auth.models import User
 
 from .models import Profile, Category, Item
-from .widgets import GoogleMapsAddressWidget
+from .forms import AdminAddItemForm
 
 
 class ProfileInline(admin.StackedInline):
@@ -31,22 +30,11 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',), }
 
 
-class ItemGMapForm(forms.ModelForm):
-    class Meta:
-        model = Item
-        fields = '__all__'
-        widgets = {
-            'address': GoogleMapsAddressWidget,
-        }
-
-
 class ItemAdmin(admin.ModelAdmin):
     model = Item
-    form = ItemGMapForm
-    raw_id_fields = ('owner', )
-    list_display = ('title', 'owner', 'published')
-    search_fields = ('title', 'owner__first_name', 'owner__last_name',
-                     'owner__email')
+    form = AdminAddItemForm
+    list_display = ('title', 'published')
+    search_fields = ('title', 'categories__title')
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

@@ -1,0 +1,67 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="ui vertical left aligned segment">
+        <div class="ui container">
+            <h2>Adicinar novo Item</h2>
+            <div class="ui form">
+                <div class="field">
+                    <label>Categorias:</label>
+                    <small>Selecione uma ou mais</small>
+                    <select id="id_categories" multiple="multiple" class="ui dropdown" name="categories" required>
+                        <option value="7">Educação e Cursos</option>
+                        <option value="1">Animais de Estimação</option>
+                        <option value="2">Financeiro</option>
+                        <option value="3">Lazer</option>
+                        <option value="4">Comer e Beber</option>
+                        <option value="5">Comunicação e Mídia</option>
+                        <option value="6">Construção e Reformas</option>
+                        <option value="8">Festas e Eventos</option>
+                        <option value="9">Informática</option>
+                        <option value="10">Limpeza e Conservação e Higienização</option>
+                        <option value="11">Saúde</option>
+                        <option value="12">Veículos</option>
+                        <option value="13">Viagens e Turismo</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Título:</label>
+                    <input maxlength="200" name="title" type="text" required />
+                </div>
+
+                <div class="field">
+                    <label>Descrição:</label>
+                    <textarea cols="40" name="description" rows="10"></textarea>
+                </div>
+
+                <div class="field">
+                    <label>Endereço:</label>
+                    <input maxlength="255" name="address" type="text" required />
+                    <div class="map_canvas_wrapper"><div id="map_canvas"></div></div>
+                </div>
+
+                <div class="field">
+                    <label>Telefone:</label>
+                    <input maxlength="20" name="phone" type="text" required />
+                </div>
+
+                <div class="field">
+                    <label>Website:</label>
+                    <input maxlength="20" name="website" type="text" required />
+                </div>
+
+                <div class="field">
+                    <label>Email:</label>
+                    <input maxlength="200" name="email" type="email" required />
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script type="text/javascript">
+        $('#id_categories').dropdown();
+    </script>
+{% endblock%}

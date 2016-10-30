@@ -27,8 +27,6 @@ class Category(models.Model):
 
 
 class Item(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE,
-                              related_name='items', verbose_name='Usuário')
     categories = models.ManyToManyField(Category, verbose_name='Categorias')
     title = models.CharField('Título', max_length=200)
     description = models.TextField('Descrição', blank=True)
