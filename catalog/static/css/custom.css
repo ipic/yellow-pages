@@ -1,10 +1,36 @@
+.ui.menu {
+	margin: 0;
+	border-radius: 0;
+}
+
+.ui.segment {
+	margin: 0;
+}
+
+.main {
+	min-height:100%;
+	padding-bottom:60px;
+	box-sizing:border-box;
+}
+
+.footer {
+	background-color: #212121;
+	position: absolute;
+	/* bottom: 0;  remove this */
+	margin-top: -50px; /* add this */
+	left: 0;
+	width: 100%;
+	padding: 15px 0;
+	background: #22335E;
+	color: #fff;
+}
+
 .masthead.segment {
 	min-height: 400px;
-	padding: 1em 0em;
-    background-color: #76C5F0 !important;
+	padding: 6em;
+	background-color: #76C5F0 !important;
 }
 .masthead h1.ui.header {
-	margin-top: 2em;
 	font-size: 4em;
 	font-weight: normal;
 }
@@ -19,9 +45,39 @@
 	margin-bottom: 50px;
 }
 
-.footer.segment {
-	padding: 5em 0em;
-    background: #22335E !important;
+.error > .message {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.category {
+	padding: 40px;
+	text-align: center;
+	background: #F4BF00;
+}
+
+.category h2 {
+	font-size: 4em;
+	color: #000;
+}
+
+.add-form > .error {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.items-list {
+	min-height: 400px;
+}
+
+.empty-items {
+	text-align: center;
+	margin: 70px;
+}
+
+.add-success {
+	margin: 30px;
+	min-height: 500px;
 }
 
 @media only screen and (max-width: 700px) {
@@ -35,6 +91,12 @@
 	.masthead h2 {
 		margin-top: 0.5em;
 		font-size: 1.5em;
+	}
+	.items-list {
+		min-height: 200px;
+	}
+	.ui.search {
+		margin-left: -25px !important;
 	}
 }
 

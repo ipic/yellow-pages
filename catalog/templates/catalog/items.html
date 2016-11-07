@@ -1,0 +1,25 @@
+<div class="ui items">
+{% for item in items %}
+    <div class="item">
+	<div class="content">
+	    <a class="header">{{ item.title|title }}</a>
+	    <div class="description">
+		<p>{{ item.description }}</p>
+	    </div>
+            {% for category in item.categories.all %}
+	    <div class="extra">
+                <div class="ui label"><i class="tag icon"></i> {{ category.title }}</div>
+	    </div>
+            {% endfor %}
+	</div>
+	<div class="image map">
+	    <img src="http://lorempixel.com/400/200/sports/1/">
+	</div>
+    </div>
+{% empty %}
+<div class="ui empty-items">
+    <h2>Ainda não existem serviços com esse termo/categoria. Gostaria de adicionar?</h2>
+    <p><a href="{% url 'add-item'%}">Clique aqui</a></p>
+</div>
+{% endfor %}
+</div>

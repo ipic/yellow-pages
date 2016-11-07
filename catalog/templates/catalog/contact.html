@@ -1,0 +1,51 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="ui add-form">
+    <div class="ui attached message">
+	<div class="header"> Contato </div>
+	<p>Preencha todos os campos</p>
+    </div>
+    {% if form.errors %}
+    <div class="ui error message">
+	<i class="close icon"></i>
+	<div class="header">
+	    Alguns errors foram encontrados
+	</div>
+	<ul class="list">
+        {% for field in form %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <li>{{ field.label }} - <a href="#id_{{ field.name }}">{{ error|escape }}</a></li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+	</ul>
+    </div>
+    {% endif %}
+    <form class="ui form attached fluid segment" method="POST" action="{% url 'contact' %}" novalidate>
+    {% csrf_token %}
+    <div class="ui form">
+        <div class="field">
+            <label>Nome:</label>
+            {{ form.name }}
+        </div>
+
+        <div class="field">
+            <label>Email:</label>
+            {{ form.email }}
+        </div>
+
+        <div class="field">
+            <label>Mensagem:</label>
+            {{ form.message }}
+        </div>
+        <div class="field">
+            <label>Digite as letras abaixo:</label>
+            {{ form.captcha }}
+        </div>
+        <button class="ui huge button submit" type="submit">Enviar</button>
+    </div>
+    </form>
+</div>
+{% endblock %}

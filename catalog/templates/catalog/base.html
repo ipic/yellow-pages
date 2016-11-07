@@ -9,98 +9,107 @@
 	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
     </head>
     <body>
-	{% block content %}
-	<div class="ui vertical masthead center aligned segment">
-	    <div class="ui text container">
-		<h1 class="ui header">IPIC Yellow Pages</h1>
-		<h2>Busque serviços e profissionais dentro da nossa comunidade.</h2>
-		<div class="ui category search huge">
-		    <form method="GET" action="{% url 'search' %}">
+        <div class="ui inverted menu">
+            <div class="ui container">
+                <a class="header item" href="/"> BUSQIPIC</a>
+                <a class="item" href="{% url 'add-item' %}"> Adicionar Item</a>
+                <a class="item" href="{% url 'contact' %}"> Contato</a>
+            </div>
+        </div>
+        <div class="main">
+            {% block content %}
+            <div class="ui masthead center aligned segment">
+                <div class="ui text container">
+                    <img src="{% static  'img/busqipic.png' %}" class="ui image" />
+                    <h2>Busque serviços e profissionais dentro da nossa comunidade.</h2>
+                </div>
+                <div class="ui fluid search vertical segment huge">
+                    <form method="GET" action="{% url 'search' %}">
                         <div class="ui icon input">
                             <input name="q" class="prompt" type="text" placeholder="Busque aqui..">
                             <i class="search icon"></i>
                         </div>
                     </form>
-		</div>
-	    </div>
-	</div>
-	<div class="ui vertical center aligned categories">
-	    <div class="ui grid container four column center aligned stackable">
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="animais-de-estimacao" %}"><i class="paw circular icon"></i> Animais de Estimação</a>
-		    </div>
-		</div>
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="financeiro" %}"><i class="money circular icon"></i> Bancos e instituições financeiras</a>
-		    </div>
-		</div>
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="lazer" %}"><i class="soccer circular icon"></i> Centro Culturais e de Lazer</a>
-		    </div>
-		</div>
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="comer-beber" %}"><i class="food circular icon"></i> Comer e beber</a>
-		    </div>
-		</div>
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="comunicacao-midia" %}"><i class="comments outline circular icon"></i> Comunicação e mídia</a>
-		    </div>
-		</div>
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="construcao-reformas" %}"><i class="building circular icon"></i> Construção e reformas</a>
-		    </div>
-		</div>
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="educacao-cursos" %}"><i class="book circular icon"></i> Educação e cursos</a>
-		    </div>
-		</div>
+                </div>
+            </div>
+            <div class="ui center aligned categories">
+                <div class="ui grid container four column center aligned stackable">
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="animais-de-estimacao" %}"><i class="paw circular icon"></i> Animais de Estimação</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="financeiro" %}"><i class="money circular icon"></i> Bancos e instituições financeiras</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="lazer" %}"><i class="soccer circular icon"></i> Centro Culturais e de Lazer</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="comer-beber" %}"><i class="food circular icon"></i> Comer e beber</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="comunicacao-midia" %}"><i class="comments outline circular icon"></i> Comunicação e mídia</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="construcao-reformas" %}"><i class="building circular icon"></i> Construção e reformas</a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="educacao-cursos" %}"><i class="book circular icon"></i> Educação e cursos</a>
+                        </div>
+                    </div>
 
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="festas-eventos" %}"><i class="camera retro circular icon"></i> Festas e eventos</a>
-		    </div>
-		</div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="festas-eventos" %}"><i class="camera retro circular icon"></i> Festas e eventos</a>
+                        </div>
+                    </div>
 
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="informatica" %}"><i class="mouse pointer retro circular icon"></i> Informática</a>
-		    </div>
-		</div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="informatica" %}"><i class="mouse pointer retro circular icon"></i> Informática</a>
+                        </div>
+                    </div>
 
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="limpeza-higiene" %}"><i class="recycle retro circular icon"></i> Limpeza e Conservação e Higienização</a>
-		    </div>
-		</div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="limpeza-higiene" %}"><i class="recycle retro circular icon"></i> Limpeza e Conservação e Higienização</a>
+                        </div>
+                    </div>
 
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="saude" %}"><i class="doctor retro circular icon"></i> Saúde</a>
-		    </div>
-		</div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="saude" %}"><i class="doctor retro circular icon"></i> Saúde</a>
+                        </div>
+                    </div>
 
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="veiculos" %}"><i class="shipping retro circular icon"></i> Veículos</a>
-		    </div>
-		</div>
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="veiculos" %}"><i class="shipping retro circular icon"></i> Veículos</a>
+                        </div>
+                    </div>
 
-		<div class="column">
-		    <div class="ui icon header">
-			<a href="{% url 'category-list' slug="viagens-turismo" %}"><i class="sun retro circular icon"></i> Viagens e Turismo</a>
-		    </div>
-		</div>
-	    </div>
-	</div>
-	{% endblock %}
-	<div class="ui inverted vertical footer segment">
+                    <div class="column">
+                        <div class="ui icon header">
+                            <a href="{% url 'category-list' slug="viagens-turismo" %}"><i class="sun retro circular icon"></i> Viagens e Turismo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+	<div class="footer">
 	    <div class="ui text center aligned container">
 		<small>IPIC Yellow Pages é um projeto do Ministério de Comunicação da Primeira Igreja Presbiteriana de Curitiba. O código fonte desse site está disponível <a target="_blank" href="https://github.com/ipic/yellow-pages">aqui</a></small>
 	    </div>

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from autoslug import AutoSlugField
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,7 +18,7 @@ class Profile(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
 
     def __str__(self):
         return self.title
@@ -27,13 +29,16 @@ class Category(models.Model):
 
 
 class Item(models.Model):
+    user = models.ForeignKey(User, verbose_name='Usuário', null=True,
+                             on_delete=models.SET_NULL)
     categories = models.ManyToManyField(Category, verbose_name='Categorias')
     title = models.CharField('Título', max_length=200)
+    slug = AutoSlugField(populate_from='title', unique=True)
     description = models.TextField('Descrição', blank=True)
     address = models.CharField('Endereço', max_length=255)
     phone = models.CharField('Telefone', max_length=20)
     website = models.URLField('Website', blank=True)
-    email = models.URLField('Email', blank=True)
+    email = models.EmailField('Email')
     published = models.BooleanField('Publicado', default=False)
 
     def __str__(self):

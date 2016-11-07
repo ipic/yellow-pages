@@ -27,14 +27,13 @@ class UserAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
     list_display = ('title', 'slug')
-    prepopulated_fields = {'slug': ('title',), }
 
 
 class ItemAdmin(admin.ModelAdmin):
     model = Item
     form = AdminAddItemForm
     list_display = ('title', 'published')
-    search_fields = ('title', 'categories__title')
+    search_fields = ('title', 'categories__title', 'description')
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
