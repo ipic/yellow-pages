@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 from .models import Profile, Category, Item
 from .forms import AdminAddItemForm
@@ -29,11 +30,21 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
 
 
+def publish_item(modeladmin, request, queryset):
+    for item in queryset:
+        item.publish()
+    messages.success(request, 'Itens publicados!')
+publish_item.short_description = 'Publicar item'
+
+
 class ItemAdmin(admin.ModelAdmin):
     model = Item
     form = AdminAddItemForm
-    list_display = ('title', 'published')
-    search_fields = ('title', 'categories__title', 'description')
+    raw_id_fields = ('user', )
+    list_display = ('title', 'address', 'website', 'published', )
+    search_fields = ('title', 'categories__title', 'description', 'website')
+    actions = [publish_item]
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

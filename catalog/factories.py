@@ -1,17 +1,28 @@
-import factory
+import random
+
+from django.contrib.gis.geos import Point
 
 from .models import Category
+
+import factory
+from factory.fuzzy import BaseFuzzyAttribute
+
+
+class FuzzyPoint(BaseFuzzyAttribute):
+    def fuzz(self):
+        return Point(random.uniform(-180.0, 180.0),
+                     random.uniform(-90.0, 90.0))
 
 
 class ItemFactory(factory.django.DjangoModelFactory):
     title = factory.Faker('company', locale='pt_BR')
+    location = FuzzyPoint()
     address = factory.Faker('address', locale='pt_BR')
     phone = factory.Faker('phone_number', locale='pt_BR')
     description = factory.Faker('text', locale='pt_BR')
     website = factory.Faker('url', locale='pt_BR')
     email = factory.Faker('email', locale='pt_BR')
     published = True
-
 
     @factory.post_generation
     def categories(self, create, extracted, **kwargs):
@@ -23,4 +34,3 @@ class ItemFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = 'catalog.Item'
-

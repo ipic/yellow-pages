@@ -1,7 +1,6 @@
 from django.views.generic import TemplateView, ListView, FormView
 from django.db.models import Q
 from django.shortcuts import redirect, get_object_or_404
-from django.urls import reverse_lazy
 from django.contrib import messages
 
 from .models import Item, Category
@@ -14,7 +13,7 @@ class IndexView(TemplateView):
 
 class CategoryItemsList(ListView):
     template_name = 'catalog/category_items.html'
-    paginate_by = 20
+    paginate_by = 10
     context_object_name = 'items'
 
     def get_queryset(self):
@@ -54,7 +53,10 @@ class SearchView(ListView):
 class AddItemFormView(FormView):
     template_name = 'catalog/add_item_form.html'
     form_class = AddItemForm
-    success_url = reverse_lazy('add-success')
+
+    def form_valid(self, form):
+        form.save()
+        return redirect('add-success')
 
 
 class ContactFormView(FormView):
@@ -63,6 +65,7 @@ class ContactFormView(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success('Sua mensagem foi enviada! Obrigado pelo contato. '
-                         'Iremos responder o mais rápido possível')
-        return redirect('index')
+        messages.success(self.request, 'Sua mensagem foi enviada! '
+                         'Obrigado pelo contato. Iremos responder o mais '
+                         'rápido possível')
+        return redirect('contact')

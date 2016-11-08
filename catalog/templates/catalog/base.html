@@ -7,6 +7,7 @@
 	<title></title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
 	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        {% block top_scripts %}{% endblock %}
     </head>
     <body>
         <div class="ui inverted menu">
@@ -117,5 +118,13 @@
     </body>
     <script src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-    {% block extra_scripts %}{% endblock%}
+    {% block extra_scripts%}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('i.search').click(function() {
+                    $('form').submit();
+            })
+        });
+    </script>
+    {% endblock %}
 </html>

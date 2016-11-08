@@ -6,6 +6,17 @@
 	<div class="header"> Contato </div>
 	<p>Preencha todos os campos</p>
     </div>
+    {% if messages %}
+    <div class="ui positive message">
+	<i class="close icon"></i>
+        <div class="header">
+           Obrigado!
+        </div>
+	{% for message in messages %}
+	  <p>{{ message|safe }}</p>
+	{% endfor %}
+    </div>
+    {% endif %}
     {% if form.errors %}
     <div class="ui error message">
 	<i class="close icon"></i>
@@ -49,3 +60,16 @@
     </form>
 </div>
 {% endblock %}
+
+{% block extra_scripts %}
+    <script type="text/javascript">
+        $('.message .close')
+          .on('click', function() {
+                  $(this)
+                    .closest('.message')
+                    .transition('fade')
+                  ;
+                })
+        ;
+    </script>
+{% endblock%}

@@ -1,16 +1,29 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-<div class="ui container">
-    <h2>Resultados com: {{ term }}</h2>
-    <form method="GET" action="{% url 'search' %}">
-        {% csrf_token %}
-        <div class="ui massive form">
-            <div class="field">
-                <input type="text" placeholder="Busque aqui" />
+<div class="ui container center aligned search-result">
+    <div class="ui header">
+        <h2>Resultados</h2>
+        <p>Fo{{ items.count|pluralize:"i,ram"}} encontrado{{ items.count|pluralize }} {{ items.count }} serviço{{ items.count|pluralize }} com o termo "{{ term }}"
+    </div>
+    <div class="ui fluid search vertical segment massive">
+        <form method="GET" action="{% url 'search' %}">
+            <div class="ui icon input">
+                <input name="q" class="prompt" type="text" placeholder="Busque aqui" />
+                <i class="search icon"></i>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
     {% include 'catalog/items.html' %}
 </div>
+{% endblock %}
+
+{% block extra_scripts%}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('i.search').click(function() {
+                $('form').submit();
+        })
+    });
+</script>
 {% endblock %}

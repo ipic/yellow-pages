@@ -1,25 +1,53 @@
+{% if items %}
 <div class="ui items">
-{% for item in items %}
+    {% for item in items %}
     <div class="item">
 	<div class="content">
 	    <a class="header">{{ item.title|title }}</a>
+	    <div class="meta">
+		<p><i class="marker icon"></i> {{ item.address }}</p>
+		<p><i class="phone icon"></i> {{ item.phone }}</p>
+		<p><i class="globe icon"></i> <a target="_blank" href="{{ item.website }}">{{ item.website }}</a></p>
+	    </div>
 	    <div class="description">
 		<p>{{ item.description }}</p>
 	    </div>
-            {% for category in item.categories.all %}
-	    <div class="extra">
-                <div class="ui label"><i class="tag icon"></i> {{ category.title }}</div>
-	    </div>
-            {% endfor %}
+	    {% for category in item.categories.all %}
+		<div class="extra">
+		    <a href="{{ category.get_absolute_url }}"><div class="ui label"><i class="tag icon"></i> {{ category.title }}</div></a>
+		</div>
+	    {% endfor %}
 	</div>
 	<div class="image map">
 	    <img src="http://lorempixel.com/400/200/sports/1/">
 	</div>
     </div>
-{% empty %}
-<div class="ui empty-items">
-    <h2>Ainda não existem serviços com esse termo/categoria. Gostaria de adicionar?</h2>
-    <p><a href="{% url 'add-item'%}">Clique aqui</a></p>
+    {% endfor %}
+    {% if page_obj.has_other_pages %}
+    <div class="ui pagination menu">
+	{% if page_obj.has_previous %}
+	    <a class="item" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+	{% else %}
+	    <div class="disabled item"><span>&laquo;</span></div>
+	{% endif %}
+	{% for i in page_obj.paginator.page_range %}
+	    {% if page_obj.number == i %}
+		<a class="active item">{{ i }}</a>
+	    {% else %}
+		<a class="item" href="?page={{ i }}">{{ i }}</a>
+	    {% endif %}
+	{% endfor %}
+	{% if page_obj.has_next %}
+	    <a class="item" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+	{% else %}
+	    <div class="disabled item"><span>&raquo;</span></div>
+	{% endif %}
+    </ul>
+    {% endif %}
 </div>
-{% endfor %}
-</div>
+{% else %}
+    <div class="ui empty-items">
+	<h2>Ainda não existem serviços com esse termo/categoria. Gostaria de adicionar?</h2>
+	<p><a href="{% url 'add-item'%}">Clique aqui</a></p>
+    </div>
+{% endif %}
