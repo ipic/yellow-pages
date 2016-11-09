@@ -2,3 +2,4 @@ Django==1.10.3
 psycopg2==2.6.2
 django-map-widgets==0.1.7
 django-autoslug==1.9.3
+gunicorn==19.6.0

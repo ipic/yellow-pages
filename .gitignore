@@ -72,5 +72,7 @@ semantic.json
 
 # NPM
 node_modules
-
 db.sqlite3
+
+staticfiles
+.env

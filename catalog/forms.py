@@ -1,6 +1,5 @@
 from django import forms
 
-from .widgets import GoogleMapsAddressWidget
 from .models import Item
 
 from captcha.fields import CaptchaField

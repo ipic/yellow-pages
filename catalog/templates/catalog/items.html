@@ -12,11 +12,11 @@
 	    <div class="description">
 		<p>{{ item.description }}</p>
 	    </div>
+	    <div class="extra">
 	    {% for category in item.categories.all %}
-		<div class="extra">
 		    <a href="{{ category.get_absolute_url }}"><div class="ui label"><i class="tag icon"></i> {{ category.title }}</div></a>
-		</div>
 	    {% endfor %}
+	    </div>
 	</div>
 	<div class="image map">
 	    <img src="http://lorempixel.com/400/200/sports/1/">
