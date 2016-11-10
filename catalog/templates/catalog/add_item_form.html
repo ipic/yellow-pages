@@ -1,9 +1,12 @@
 {% extends 'catalog/base.html' %}
 {% load static %}
+
+{% block title %}BUSQIPIC - Adicionar Serviço{% endblock %}
+
 {% block content %}
 <div class="ui add-form">
     <div class="ui attached message">
-	<div class="header"> Adicionar novo Item </div>
+	<div class="header"> Adicionar novo serviço</div>
 	<p>Preencha todos os campos</p>
     </div>
     {% if form.errors %}

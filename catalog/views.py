@@ -39,7 +39,9 @@ class SearchView(ListView):
         return super(SearchView, self).dispatch(request, **kwargs)
 
     def get_queryset(self, **kwargs):
-        q = Q(title__icontains=self.term) | Q(description__icontains=self.term)
+        q = Q(title__icontains=self.term)
+        q |= Q(description__icontains=self.term)
+        q |= Q(address__icontains=self.term)
         q &= Q(published=True)
         items = Item.objects.filter(q)
         return items

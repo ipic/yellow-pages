@@ -1,5 +1,7 @@
 {% extends 'catalog/base.html' %}
 
+{% block title %}BUSQIPIC - Busca{% endblock %}
+
 {% block content %}
 <div class="ui container center aligned search-result">
     <div class="ui header">
@@ -14,7 +16,9 @@
             </div>
         </form>
     </div>
-    {% include 'catalog/items.html' %}
+</div>
+<div class="ui container">
+{% include 'catalog/items.html' %}
 </div>
 {% endblock %}
 
