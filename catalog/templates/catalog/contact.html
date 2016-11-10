@@ -37,24 +37,12 @@
     <form class="ui form attached fluid segment" method="POST" action="{% url 'contact' %}" novalidate>
     {% csrf_token %}
     <div class="ui form">
+        {% for field in form %}
         <div class="field">
-            <label>Nome:</label>
-            {{ form.name }}
+            <label>{{ field.label }}:</label>
+            {{ field }}
         </div>
-
-        <div class="field">
-            <label>Email:</label>
-            {{ form.email }}
-        </div>
-
-        <div class="field">
-            <label>Mensagem:</label>
-            {{ form.message }}
-        </div>
-        <div class="field">
-            <label>Digite as letras abaixo:</label>
-            {{ form.captcha }}
-        </div>
+        {% endfor %}
         <button class="ui huge button submit" type="submit">Enviar</button>
     </div>
     </form>

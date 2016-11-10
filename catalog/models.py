@@ -23,12 +23,16 @@ class Profile(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
+    description = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('category-list', args=[self.slug])
+
+    def get_http_absolute_url(self):
+        return '{}{}'.format(settings.SITE_URL, self.get_absolute_url())
 
     class Meta:
         verbose_name = 'Categoria'
@@ -66,11 +70,19 @@ Olá!
 Acabamos de publicar seu item no nosso sistema.
 
 Nome: {}
+
 Endereço: {}
+
 Telefone: {}
+
 Site: {}
 
+Visite a(s) categoria(s) que ele está presente:
 """.format(self.title, self.address, self.phone, self.website)
+        for category in self.categories.all():
+            message += """
+- {}
+        """.format(category.get_http_absolute_url())
         send_mail('[BUSQIPIC] Seu serviço foi publicado', message,
                   settings.DEFAULT_FROM_EMAIL, [self.email])
 

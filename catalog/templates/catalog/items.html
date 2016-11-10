@@ -1,3 +1,4 @@
+{% load concat %}
 {% if items %}
 <div class="ui items">
     {% for item in items %}
@@ -18,8 +19,9 @@
 	    {% endfor %}
 	    </div>
 	</div>
-	<div class="image map">
-	    <img src="http://lorempixel.com/400/200/sports/1/">
+        <div class="map image"
+	     data-latitude="{{ item.location.coords.1}}"
+	     data-longitude="{{ item.location.coords.0}}">
 	</div>
     </div>
     {% endfor %}
@@ -51,3 +53,27 @@
 	<p><a href="{% url 'add-item'%}">Clique aqui</a></p>
     </div>
 {% endif %}
+
+{% block extra_scripts %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyAEaQEcJdz2oUSLyxQM5w90TECwfnZwnKU"></script>
+    <script>
+	// mapas dos eventos
+	var maps = document.getElementsByClassName('map');
+	for (i = 0; i < maps.length; i++) {
+            var map = maps[i];
+            var latitude = map.getAttribute('data-latitude');
+            var longitude = map.getAttribute('data-longitude');
+            var map = new google.maps.Map(map, {
+                zoom: 15,
+                disableDefaultUI: true,
+                zoomControl: false,
+                center: new google.maps.LatLng(latitude, longitude),
+                mapTypeId: "roadmap"
+            });
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(latitude, longitude),
+                map: map
+            });
+	}
+    </script>
+{% endblock %}

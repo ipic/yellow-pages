@@ -10,8 +10,8 @@ from factory.fuzzy import BaseFuzzyAttribute
 
 class FuzzyPoint(BaseFuzzyAttribute):
     def fuzz(self):
-        return Point(random.uniform(-180.0, 180.0),
-                     random.uniform(-90.0, 90.0))
+        return Point(random.uniform(3.0, 25.0),
+                     random.uniform(49.0, 51.0))
 
 
 class ItemFactory(factory.django.DjangoModelFactory):

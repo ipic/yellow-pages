@@ -5,6 +5,13 @@ DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
+SITE_URL = 'https://busqipic.herokuapp.com'
+
+DEFAULT_FROM_EMAIL = 'comunica@ipic.org.br'
+EMAIL_BACKEND = "anymail.backends.sendgrid.SendGridBackend"
+ANYMAIL = {
+    'SENDGRID_API_KEY': os.environ.get('SENDGRID_API_KEY')
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$9&c!d7*0hv70(^w@642aj-)u83_b2e0yc_d=#zm*1@a2$606t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -35,6 +42,7 @@ INSTALLED_APPS = [
     'catalog',
     'captcha',
     'mapwidgets',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +99,7 @@ LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
-USE_L10N = True
+USE_L10N = False
 USE_TZ = True
 
 
