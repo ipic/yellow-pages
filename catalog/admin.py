@@ -27,7 +27,7 @@ class UserAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
-    list_display = ('title', 'slug')
+    list_display = ('title', 'description', 'slug')
 
 
 def publish_item(modeladmin, request, queryset):
