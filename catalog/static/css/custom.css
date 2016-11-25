@@ -5,6 +5,11 @@
 
 .ui.segment {
     margin: 0;
+	box-shadow: none;
+}
+
+.ui.vertical.segment {
+	border-bottom: none;
 }
 
 .main {
@@ -117,9 +122,6 @@
     }
     .items-list {
         min-height: 200px;
-    }
-    .ui.search {
-        margin-left: -25px !important;
     }
 }
 

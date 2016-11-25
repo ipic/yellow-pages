@@ -8,7 +8,7 @@
         <h2>Resultados</h2>
         <p>Fo{{ items.count|pluralize:"i,ram"}} encontrado{{ items.count|pluralize }} {{ items.count }} serviço{{ items.count|pluralize }} com o termo "{{ term }}"
     </div>
-    <div class="ui fluid search vertical segment massive">
+    <div class="ui fluid search vertical segment huge">
         <form method="GET" action="{% url 'search' %}">
             <div class="ui icon input">
                 <input name="q" class="prompt" type="text" placeholder="Busque aqui" />
