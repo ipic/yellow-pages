@@ -134,4 +134,12 @@
 	.mw-wrap {
 		min-width: 0 !important;
 	}
+
+	.category {
+		padding: 15px;
+	}
+
+	.category h2 {
+		font-size: 3em;
+	}
 }
