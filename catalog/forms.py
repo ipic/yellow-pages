@@ -30,6 +30,12 @@ class AdminAddItemForm(forms.ModelForm):
             'address': forms.TextInput(attrs={'id': 'address-mw-google-address-input'})
         }
 
+    class Media:
+        js = ('js/mw_google_point_field.js', )
+        css = {
+            'all': ('css/custom.css', )
+        }
+
 
 class ContactForm(forms.Form):
     name = forms.CharField(label='Nome', max_length=255)
