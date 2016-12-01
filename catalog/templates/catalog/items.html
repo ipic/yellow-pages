@@ -3,10 +3,11 @@
     {% for item in items %}
     <div class="item">
 	<div class="content">
-	    <a class="header">{{ item.title|title }}</a>
+            <a class="header" href="{{ item.get_absolute_url }}">{{ item.title|title }}</a>
 	    <div class="meta">
-		<p><i class="marker icon"></i> {{ item.address }}</p>
+		<p><i class="marker icon"></i> {{ item.address|default:"-" }}</p>
 		<p><i class="phone icon"></i> {{ item.phone }}</p>
+                {% if item.cellphone %}<p><i class="mobile icon"></i>{{ item.cellphone }}</p>{% endif %}
 		<p><i class="globe icon"></i> <a target="_blank" href="{{ item.website }}">{{ item.website }}</a></p>
 	    </div>
 	    <div class="description">
@@ -18,10 +19,12 @@
 	    {% endfor %}
 	    </div>
 	</div>
+        {% if item.location %}
         <div class="map image"
 	     data-latitude="{{ item.location.coords.1}}"
 	     data-longitude="{{ item.location.coords.0}}">
 	</div>
+        {% endif %}
     </div>
     {% endfor %}
     {% if page_obj.has_other_pages %}
@@ -56,7 +59,6 @@
 {% block extra_scripts %}
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyAEaQEcJdz2oUSLyxQM5w90TECwfnZwnKU"></script>
     <script>
-	// mapas dos eventos
 	var maps = document.getElementsByClassName('map');
 	for (i = 0; i < maps.length; i++) {
             var map = maps[i];
@@ -65,7 +67,7 @@
             var map = new google.maps.Map(map, {
                 zoom: 15,
                 disableDefaultUI: true,
-                zoomControl: false,
+                scrollwheel: false,
                 center: new google.maps.LatLng(latitude, longitude),
                 mapTypeId: "roadmap"
             });

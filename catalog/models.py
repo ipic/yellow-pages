@@ -23,6 +23,7 @@ class Profile(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
+    icon_name = models.CharField(max_length=20, default='comment outline')
     description = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
@@ -46,9 +47,10 @@ class Item(models.Model):
     title = models.CharField('Título', max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
     description = models.TextField('Descrição', blank=True)
-    address = models.CharField('Endereço', max_length=255)
-    location = geo_models.PointField('Localização')
+    address = models.CharField('Endereço', max_length=255, blank=True)
+    location = geo_models.PointField('Localização', null=True, blank=True)
     phone = models.CharField('Telefone', max_length=20)
+    cellphone = models.CharField('Celular', max_length=20, blank=True)
     website = models.URLField('Website', blank=True)
     email = models.EmailField('Email')
     published = models.BooleanField('Publicado', default=False)
@@ -57,6 +59,12 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('item-detail', args=[self.slug])
+
+    def get_http_absolute_url(self):
+        return '{}{}'.format(settings.SITE_URL, self.get_absolute_url())
 
     def publish(self):
         if self.published:
@@ -69,6 +77,8 @@ Olá!
 
 Acabamos de publicar seu item no nosso sistema.
 
+URL: {}
+
 Nome: {}
 
 Endereço: {}
@@ -78,7 +88,8 @@ Telefone: {}
 Site: {}
 
 Visite a(s) categoria(s) que ele está presente:
-""".format(self.title, self.address, self.phone, self.website)
+""".format(self.get_http_absolute_url(), self.title, self.address, self.phone,
+           self.website)
         for category in self.categories.all():
             message += """
 - {}

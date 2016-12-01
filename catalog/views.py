@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView, FormView
+from django.views.generic import TemplateView, ListView, FormView, DetailView
 from django.db.models import Q
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
@@ -9,6 +9,11 @@ from .forms import AddItemForm, ContactForm
 
 class IndexView(TemplateView):
     template_name = 'catalog/base.html'
+
+    def get_context_data(self):
+        context = super(IndexView, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class CategoryItemsList(ListView):
@@ -24,6 +29,12 @@ class CategoryItemsList(ListView):
         context = super(CategoryItemsList, self).get_context_data()
         context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
         return context
+
+
+class ItemView(DetailView):
+    model = Item
+    template_name = 'catalog/item.html'
+    context_object_name = 'item'
 
 
 class SearchView(ListView):

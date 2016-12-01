@@ -1,0 +1,100 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}BUSQIPIC - {{ item.title }}{% endblock %}
+
+{% block content %}
+<div class="ui category">
+    <div class="ui container">
+        <h1 class="header">{{ item.title }}</h1>
+    </div>
+</div>
+{% if item.location %}
+    <div id="bigmap"
+        data-latitude="{{ item.location.coords.1}}"
+        data-longitude="{{ item.location.coords.0}}">
+    </div>
+{% endif %}
+<div class="ui container">
+    {% if item.description %}
+    <div class="ui horizontal divider header">
+        <i class="sticky note icon"></i>
+        Descrição
+    </div>
+    <h4>{{ item.description }}</h4>
+    {% endif %}
+    <div class="ui horizontal divider header">
+        <i class="tag icon"></i>
+        Informações adicionais
+    </div>
+    <table class="ui definition table">
+        <tbody>
+            {% if item.address %}
+            <tr>
+                <td class="two wide column">Endereço</td>
+                <td>{{ item.address }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="two wide column">Categorias</td>
+                <td>
+                {% for category in item.categories.all %}
+		    <a href="{{ category.get_absolute_url }}"><div class="ui label"><i class="tag icon"></i> {{ category.title }}</div></a>
+	        {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td class="two wide column">Website</td>
+                <td><a target="_blank" href="{{ item.website }}">Clique aqui</a></td>
+            </tr>
+            <tr>
+                <td class="two wide column">Email para contato</td>
+                <td><a target="#" href="mailto:{{ item.email }}">Clique aqui</a></td>
+            </tr>
+            <tr>
+                <td class="two wide column">Telefone</td>
+                <td>{{ item.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="ui horizontal divider header">
+        <i class="tag icon"></i>
+        Compartilhe
+    </div>
+    <div class="ui centered">
+        <button class="ui facebook button sharer" data-sharer="facebook" data-title="{{ item.title }}" data-url="{{ item.get_http_absolute_url }}">
+            <i class="facebook icon"></i>
+            Facebook
+        </button>
+        <button class="ui twitter button sharer" data-sharer="twitter" data-title="{{ item.title }}" data-url="{{ item.get_http_absolute_url }}">
+            <i class="twitter icon"></i>
+            Twitter
+        </button>
+        <button class="ui whatsapp button sharer" data-sharer="whatsapp" data-title="{{ item.title }}" data-url="{{ item.get_http_absolute_url }}">
+            <i class="whatsapp icon"></i>
+            Whatsapp
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    {% if item.location %}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyAEaQEcJdz2oUSLyxQM5w90TECwfnZwnKU"></script>
+    <script>
+	var map = document.getElementById('bigmap'),
+            latitude = map.getAttribute('data-latitude'),
+            longitude = map.getAttribute('data-longitude'),
+            map = new google.maps.Map(map, {
+                zoom: 15,
+                disableDefaultUI: true,
+                scrollwheel: false,
+                center: new google.maps.LatLng(latitude, longitude),
+                mapTypeId: "roadmap"
+            }),
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(latitude, longitude),
+                map: map
+            });
+        </script>
+    {% endif %}
+{% endblock %}

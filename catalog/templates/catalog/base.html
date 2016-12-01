@@ -55,77 +55,13 @@
             </div>
             <div class="ui center aligned categories">
                 <div class="ui grid container four column center aligned stackable">
+                    {% for category in categories %}
                     <div class="column">
                         <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="animais-de-estimacao" %}"><i class="paw circular icon"></i> Animais de Estimação</a>
+                            <a href="{{ category.get_absolute_url }}"><i class="{{ category.icon_name }} circular icon"></i> {{ category.title }}</a>
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="financeiro" %}"><i class="money circular icon"></i> Bancos e instituições financeiras</a>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="lazer" %}"><i class="soccer circular icon"></i> Centro Culturais e de Lazer</a>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="comer-beber" %}"><i class="food circular icon"></i> Comer e beber</a>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="comunicacao-midia" %}"><i class="comments outline circular icon"></i> Comunicação e mídia</a>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="construcao-reformas" %}"><i class="building circular icon"></i> Construção e reformas</a>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="educacao-cursos" %}"><i class="book circular icon"></i> Educação e cursos</a>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="festas-eventos" %}"><i class="camera retro circular icon"></i> Festas e eventos</a>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="informatica" %}"><i class="mouse pointer retro circular icon"></i> Informática</a>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="limpeza-higiene" %}"><i class="recycle retro circular icon"></i> Limpeza e Conservação e Higienização</a>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="saude" %}"><i class="doctor retro circular icon"></i> Saúde</a>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="veiculos" %}"><i class="shipping retro circular icon"></i> Veículos</a>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="ui icon header">
-                            <a href="{% url 'category-list' slug="viagens-turismo" %}"><i class="sun retro circular icon"></i> Viagens e Turismo</a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             {% endblock %}
@@ -138,6 +74,7 @@
     </body>
     <script src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="//cdn.jsdelivr.net/sharer.js/0.2.16/sharer.min.js"></script>
     {% block extra_scripts%}
     <script type="text/javascript">
         $(document).ready(function () {
